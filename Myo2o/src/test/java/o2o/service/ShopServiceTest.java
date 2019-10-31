@@ -54,7 +54,7 @@ public class ShopServiceTest extends BaseTest {
 
     @Test
     public void modifyShopTest() throws FileNotFoundException {
-        Shop shop=shopService.getShopById(56L);
+        Shop shop=shopService.getShopById(63L);
         shop.setShopName("nanguangwei");
         File file=new File("C:\\Users\\63296\\Pictures\\t.jpg");
         ShopExecution se=shopService.modifyShop(shop,new FileInputStream(file),file.getName());

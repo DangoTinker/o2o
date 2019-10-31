@@ -1,3 +1,9 @@
 web\shopadmin\ShopAdminController.class
+web\shopadmin\ProductManagementController.class
+service\ProductCategoryService.class
+dto\ProductCategoryExecution.class
+web\shopadmin\ProductAdminController.class
+service\impl\ProductCategoryServiceImpl.class
+enums\ProductCategoryStateEnum.class
 web\superadmin\AreaController.class
 web\temp.class

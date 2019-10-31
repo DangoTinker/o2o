@@ -13,6 +13,8 @@ $(function(){
             }
             $('#shopInfo').attr('href','/shopadmin/shopoperation?shopId='+shopId);
 
+            $('#productCategoryInfo').attr('href','/shopadmin/productcategoryoperation?shopId='+shopId);
+
         }
 
     })
