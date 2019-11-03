@@ -17,8 +17,10 @@ public class ShopCategoryDaoTest extends BaseTest {
 
     @Test
     public void queryShopCategoryTest(){
-        List list=shopCategoryDao.queryShopCategory(new ShopCategory());
-        assertEquals(2,list.size());
+        List<ShopCategory> list=shopCategoryDao.queryShopCategory(null);
+        for(ShopCategory i:list ){
+            System.out.println(i.getShopCategoryName());
+        }
 
     }
 

@@ -13,8 +13,8 @@
       <list>
         <option value="Enum" />
         <option value="HTML File" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -28,17 +28,17 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\63296\IdeaProjects\Myo2o\src\main\webapp\WEB-INF\html\shop" />
-      <recent name="C:\Users\63296\IdeaProjects\Myo2o\src\main\webapp\WEB-INF\html" />
-      <recent name="C:\Users\63296\IdeaProjects\Myo2o\src\test" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\63296\IdeaProjects\Myo2o\src\main\webapp\resources\js\product" />
       <recent name="C:\Users\63296\IdeaProjects\Myo2o\src\main\java\web\shopadmin" />
       <recent name="C:\Users\63296\IdeaProjects\Myo2o\src\main\java\service\impl" />
       <recent name="C:\Users\63296\IdeaProjects\Myo2o\src\main\java\service" />
       <recent name="C:\Users\63296\IdeaProjects\Myo2o\src\main\resources\mapper" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\63296\IdeaProjects\Myo2o\src\main\webapp\WEB-INF\html\shop" />
+      <recent name="C:\Users\63296\IdeaProjects\Myo2o\src\main\webapp\WEB-INF\html" />
+      <recent name="C:\Users\63296\IdeaProjects\Myo2o\src\test" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -54,7 +54,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Maven.tomcat7">
-    <configuration name="AreaDaoTest.queryAreaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductDaoTest.queryProductByIdTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Myo2o" />
       <extension name="coverage">
         <pattern>
@@ -63,14 +63,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="o2o.dao" />
-      <option name="MAIN_CLASS_NAME" value="o2o.dao.AreaDaoTest" />
-      <option name="METHOD_NAME" value="queryAreaTest" />
+      <option name="MAIN_CLASS_NAME" value="o2o.dao.ProductDaoTest" />
+      <option name="METHOD_NAME" value="queryProductByIdTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProcductCategoryDao.deleteProductCategoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductDaoTest.queryProductListTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Myo2o" />
       <extension name="coverage">
         <pattern>
@@ -79,14 +79,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="o2o.dao" />
-      <option name="MAIN_CLASS_NAME" value="o2o.dao.ProcductCategoryDao" />
-      <option name="METHOD_NAME" value="deleteProductCategoryTest" />
+      <option name="MAIN_CLASS_NAME" value="o2o.dao.ProductDaoTest" />
+      <option name="METHOD_NAME" value="queryProductListTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShopDaoTest.queryShopListTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductDaoTest.updateProductTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Myo2o" />
       <extension name="coverage">
         <pattern>
@@ -95,40 +95,40 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="o2o.dao" />
-      <option name="MAIN_CLASS_NAME" value="o2o.dao.ShopDaoTest" />
-      <option name="METHOD_NAME" value="queryShopListTest" />
+      <option name="MAIN_CLASS_NAME" value="o2o.dao.ProductDaoTest" />
+      <option name="METHOD_NAME" value="updateProductTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShopServiceTest.getShopListTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductImgDaoTest.deleteProductImgByProductIdTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Myo2o" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="o2o.service.*" />
+          <option name="PATTERN" value="o2o.dao.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="o2o.service" />
-      <option name="MAIN_CLASS_NAME" value="o2o.service.ShopServiceTest" />
-      <option name="METHOD_NAME" value="getShopListTest" />
+      <option name="PACKAGE_NAME" value="o2o.dao" />
+      <option name="MAIN_CLASS_NAME" value="o2o.dao.ProductImgDaoTest" />
+      <option name="METHOD_NAME" value="deleteProductImgByProductIdTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShopServiceTest.modifyShopTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ShopCategoryDaoTest.queryShopCategoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Myo2o" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="o2o.service.*" />
+          <option name="PATTERN" value="o2o.dao.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="o2o.service" />
-      <option name="MAIN_CLASS_NAME" value="o2o.service.ShopServiceTest" />
-      <option name="METHOD_NAME" value="modifyShopTest" />
+      <option name="PACKAGE_NAME" value="o2o.dao" />
+      <option name="MAIN_CLASS_NAME" value="o2o.dao.ShopCategoryDaoTest" />
+      <option name="METHOD_NAME" value="queryShopCategoryTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -161,11 +161,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ProcductCategoryDao.deleteProductCategoryTest" />
-        <item itemvalue="JUnit.ShopServiceTest.modifyShopTest" />
-        <item itemvalue="JUnit.ShopServiceTest.getShopListTest" />
-        <item itemvalue="JUnit.ShopDaoTest.queryShopListTest" />
-        <item itemvalue="JUnit.AreaDaoTest.queryAreaTest" />
+        <item itemvalue="JUnit.ShopCategoryDaoTest.queryShopCategoryTest" />
+        <item itemvalue="JUnit.ProductDaoTest.queryProductListTest" />
+        <item itemvalue="JUnit.ProductImgDaoTest.deleteProductImgByProductIdTest" />
+        <item itemvalue="JUnit.ProductDaoTest.updateProductTest" />
+        <item itemvalue="JUnit.ProductDaoTest.queryProductByIdTest" />
       </list>
     </recent_temporary>
   </component>
@@ -183,6 +183,25 @@
     <servers />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/service/impl/ProductServiceImpl.java</url>
+          <line>85</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/o2o/dao/ProductDaoTest.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/o2o/dao/ProductDaoTest.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
         <watch expression="datasource" />

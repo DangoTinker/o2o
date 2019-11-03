@@ -33,6 +33,9 @@ public class HeadLine {
         this.lastEditTime = lastEditTime;
     }
 
+    public HeadLine() {
+    }
+
     public void setLineId(Long lineId) {
         this.lineId = lineId;
     }

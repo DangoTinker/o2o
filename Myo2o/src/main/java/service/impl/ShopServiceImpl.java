@@ -1,6 +1,7 @@
 package service.impl;
 
 import dao.ShopDao;
+import dto.ImageHolder;
 import dto.ShopExecution;
 import entity.Shop;
 import enums.ShopStateEnum;
@@ -26,7 +27,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     @Transactional
-    public ShopExecution addShop(Shop shop, InputStream file,String fileName) {
+    public ShopExecution addShop(Shop shop, ImageHolder imageHolder) {
         if(shop==null){
             return new ShopExecution(ShopStateEnum.NULL_SHOPID);
         }
@@ -40,7 +41,7 @@ public class ShopServiceImpl implements ShopService {
             if(n<=0){
                 throw new RuntimeException("添加失败");
             }
-            addShopImg(shop,file,fileName);
+            addShopImg(shop,imageHolder.getImage(),imageHolder.getImageName());
             n=shopDao.updateShop(shop);
 
             if(n<=0){
@@ -62,19 +63,19 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     @Transactional
-    public ShopExecution modifyShop(Shop shop, InputStream file, String fileName) {
+    public ShopExecution modifyShop(Shop shop, ImageHolder imageHolder) {
         if(shop==null||shop.getShopId()==null){
             return new ShopExecution(ShopStateEnum.NULL_SHOPID);
         }
         int n;
         try{
-            if(file!=null&&fileName!=null&&!fileName.equals("")){
+            if(imageHolder.getImage()!=null&&imageHolder.getImageName()!=null&&!imageHolder.getImageName().equals("")){
                 Shop temp=shopDao.queryShopById(shop.getShopId());
                 System.out.println(temp.getShopImg()!=null);
                 if(temp.getShopImg()!=null){
                     ImageUtil.deleteFileOrPath(temp.getShopImg());
                 }
-                addShopImg(shop,file,fileName);
+                addShopImg(shop,imageHolder.getImage(),imageHolder.getImageName());
             }
 
             n=shopDao.updateShop(shop);

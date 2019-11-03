@@ -1,6 +1,7 @@
 package service.impl;
 
 import dao.ProductCategoryDao;
+import dao.ProductDao;
 import dto.ProductCategoryExecution;
 import entity.ProductCategory;
 import enums.ProductCategoryStateEnum;
@@ -15,6 +16,8 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Autowired
     private ProductCategoryDao productCategoryDao;
+    @Autowired
+    private ProductDao productDao;
 
     @Override
     public List<ProductCategory> getProductCategoryByshopId(Long shopId) {
@@ -37,7 +40,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
                     throw new RuntimeException("添加失败");
                 }
                 else{
-                    return new ProductCategoryExecution(ProductCategoryStateEnum.SUCCESS);
+                    return new ProductCategoryExecution(ProductCategoryStateEnum.SUCCESS,list);
                 }
 
             }
@@ -53,17 +56,22 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Override
     @Transactional
-    public ProductCategoryExecution deleteProductCategory(Long productCategory, Long shopId) {
+    public ProductCategoryExecution deleteProductCategory(Long productCategoryId, Long shopId) {
+
 
         try{
-            if(productCategory==null || shopId==null){
+            if(productCategoryId==null || shopId==null){
                 return new ProductCategoryExecution(ProductCategoryStateEnum.EMPTY_LIST);
             }
 
-            int n=productCategoryDao.deleteProductCategory(productCategory,shopId);
 
+            int n=productCategoryDao.deleteProductCategory(productCategoryId,shopId);
+            int en=productDao.updateProductCategoryToNull(productCategoryId);
+            if(en<=0){
+                throw new RuntimeException("商品类别更新失败");
+            }
             if(n<=0){
-                return new ProductCategoryExecution(ProductCategoryStateEnum.EMPTY_LIST);
+                throw new RuntimeException("商品类别删除失败");
             }else{
                 return new ProductCategoryExecution(ProductCategoryStateEnum.SUCCESS);
             }

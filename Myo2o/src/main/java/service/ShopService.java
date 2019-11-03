@@ -1,5 +1,6 @@
 package service;
 
+import dto.ImageHolder;
 import dto.ShopExecution;
 import entity.Shop;
 
@@ -10,11 +11,11 @@ import java.util.List;
 public interface ShopService {
 
 
-    public ShopExecution addShop(Shop shop, InputStream file,String fileName);
+    public ShopExecution addShop(Shop shop, ImageHolder imageHolder);
 
     public Shop getShopById(Long shopId);
 
-    public ShopExecution modifyShop(Shop shop,InputStream file,String fileName);
+    public ShopExecution modifyShop(Shop shop,ImageHolder imageHolder);
 
     public List<Shop> getShops();
 

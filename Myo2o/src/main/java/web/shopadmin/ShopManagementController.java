@@ -1,6 +1,7 @@
 package web.shopadmin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dto.ImageHolder;
 import dto.ShopExecution;
 import entity.Area;
 import entity.PersonInfo;
@@ -8,7 +9,6 @@ import entity.Shop;
 import entity.ShopCategory;
 import enums.ShopStateEnum;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.UsesSunHttpServer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,7 +47,7 @@ public class ShopManagementController {
         HashMap<String,Object> model=new HashMap<String, Object>();
         try{
 
-            List<ShopCategory> shopCategories=shopCategoryService.queryShopCategory(new ShopCategory());
+            List<ShopCategory> shopCategories=shopCategoryService.queryShopCategoryList(new ShopCategory());
             List<Area> areas=areaService.getAreaList();
 //            System.out.println(shopCategories.size()+" : "+areas.size());
 
@@ -116,7 +116,7 @@ public class ShopManagementController {
 
         ShopExecution se= null;
         try {
-            se = shopService.addShop(shop,shopImg.getInputStream(),shopImg.getOriginalFilename());
+            se = shopService.addShop(shop,new ImageHolder(shopImg.getInputStream(),shopImg.getOriginalFilename()));
         } catch (IOException e) {
             e.printStackTrace();
             model.put("success",false);
@@ -248,9 +248,9 @@ public class ShopManagementController {
             ShopExecution se;
             if(shop.getShopId()!=null){
                 if(shopImg==null){
-                    se=shopService.modifyShop(shop,null,null);
+                    se=shopService.modifyShop(shop,new ImageHolder(null,null));
                 }else{
-                    se=shopService.modifyShop(shop,shopImg.getInputStream(),shopImg.getOriginalFilename());
+                    se=shopService.modifyShop(shop,new ImageHolder(shopImg.getInputStream(),shopImg.getOriginalFilename()));
                 }
                 if(ShopStateEnum.SUCCESS.getState()==se.getState()){
                     model.put("success",true);

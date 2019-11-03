@@ -1,5 +1,6 @@
 package o2o.service;
 
+import dto.ImageHolder;
 import dto.ShopExecution;
 import entity.Area;
 import entity.PersonInfo;
@@ -36,7 +37,7 @@ public class ShopServiceTest extends BaseTest {
 
         File file=new File("C:\\Users\\63296\\Pictures\\t.jpg");
 
-        ShopExecution n=shopService.addShop(shop,new FileInputStream(file),file.getName());
+        ShopExecution n=shopService.addShop(shop,new ImageHolder(new FileInputStream(file),file.getName()));
 
         assertEquals(0,n.getState());
     }
@@ -57,7 +58,7 @@ public class ShopServiceTest extends BaseTest {
         Shop shop=shopService.getShopById(63L);
         shop.setShopName("nanguangwei");
         File file=new File("C:\\Users\\63296\\Pictures\\t.jpg");
-        ShopExecution se=shopService.modifyShop(shop,new FileInputStream(file),file.getName());
+        ShopExecution se=shopService.modifyShop(shop,new ImageHolder(new FileInputStream(file),file.getName()));
         assertEquals(1,se.getState());
     }
 

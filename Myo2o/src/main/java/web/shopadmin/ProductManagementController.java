@@ -1,17 +1,28 @@
 package web.shopadmin;
 
-import dto.ProductCategoryExecution;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import dto.ImageHolder;
+import dto.ProductExecution;
+import entity.Product;
 import entity.ProductCategory;
 import entity.Shop;
-import enums.ProductCategoryStateEnum;
+import enums.ProductStateEnum;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import service.ProductCategoryService;
+import service.ProductService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.Date;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,101 +30,247 @@ import java.util.Map;
 @Controller
 @RequestMapping(value="/shopadmin")
 public class ProductManagementController {
+
+    private int MAX_FILE_COUNT=6;
+
+    @Autowired
+    private ProductService productService;
     @Autowired
     private ProductCategoryService productCategoryService;
 
-    @RequestMapping(value = "/getproductcategorylist")
+    @RequestMapping(value = "/addproduct" , method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,Object> getProductCategoryList(HttpSession session){
+    public Map<String,Object> addProduct(@Param("productStr")String productStr, HttpServletRequest request){
         Map<String,Object> model=new HashMap<String, Object>();
 
-        try{
-            Shop shop=(Shop) session.getAttribute("currentShop");
-            Long shopId=shop.getShopId();
-            List<ProductCategory> list=productCategoryService.getProductCategoryByshopId(shopId);
-            if(shop!=null && shop.getShopId()>0){
-                model.put("success",true);
-                model.put("productCategoryList",list);
+
+
+        if(request.getParameter("verifyCodeActual")==null || !request.getParameter("verifyCodeActual").equals(request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY))){
+            model.put("success",false);
+            model.put("errMsg","验证码错误");
+            return model;
+        }
+
+        ObjectMapper objectMapper=new ObjectMapper();
+        try {
+            Product product=objectMapper.readValue(productStr,Product.class);
+            CommonsMultipartFile productImg=null;
+            CommonsMultipartResolver commonsMultipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
+            List<ImageHolder> imageHolderList=new ArrayList<ImageHolder>();
+            if(commonsMultipartResolver.isMultipart(request)){
+                MultipartHttpServletRequest multipartHttpServletRequest
+                        = (MultipartHttpServletRequest) request;
+                productImg= (CommonsMultipartFile) multipartHttpServletRequest.getFile("productImg");
+
+                for(int i=0;i<MAX_FILE_COUNT;i++){
+                    CommonsMultipartFile temp=
+                            (CommonsMultipartFile) multipartHttpServletRequest
+                                    .getFile("productImg"+(i));
+                    if(temp==null){
+                        break;
+                    }
+                    imageHolderList.add(new ImageHolder(temp.getInputStream(),temp.getOriginalFilename()));
+                }
+
+                if(productImg==null){
+                    model.put("success",false);
+                    model.put("errMsg","缩略图不能为空");
+                    return model;
+                }
+
+//
+
+
+                Shop shop=(Shop) request.getSession().getAttribute("currentShop");
+
+//                shop=new Shop();
+//                shop.setShopId(68L);
+
+
+                product.setShop(shop);
+                product.setEnableStatus(0);
+
+                ProductExecution pe=productService.addProduct(product,
+                        new ImageHolder(productImg.getInputStream(),productImg.getOriginalFilename())
+                        ,imageHolderList);
+
+                if(pe.getState()== ProductStateEnum.SUCCESS.getState()){
+                    model.put("success",true);
+                    return model;
+                }else{
+                    model.put("success",false);
+                    model.put("errMsg",pe.getStateInfo());
+                    return model;
+                }
+
             }else{
                 model.put("success",false);
-                model.put("errMsg","查询错误");
+                model.put("errMsg","缩略图不能为空");
+                return model;
             }
-        }catch (Exception e){
+
+        } catch (IOException e) {
+            e.printStackTrace();
             model.put("success",false);
             model.put("errMsg",e.toString());
+            return model;
+        }
+    }
+
+
+    @RequestMapping(value = "/modifyproduct",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> modifyProduct(@Param("productStr")String productStr, HttpServletRequest request){
+        Map<String,Object> model=new HashMap<String, Object>();
+
+        String statusChangeStr=request.getParameter("statusChange");
+        boolean statusChange=Boolean.valueOf(statusChangeStr);
+
+        if(!statusChange&&(request.getParameter("verifyCodeActual")==null || !request.getParameter("verifyCodeActual").equals(request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY)))){
+            model.put("success",false);
+            model.put("errMsg","验证码错误");
+            return model;
+        }
+
+        ObjectMapper objectMapper=new ObjectMapper();
+        try {
+            Product product=objectMapper.readValue(productStr,Product.class);
+            CommonsMultipartFile productImg=null;
+            CommonsMultipartResolver commonsMultipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
+            List<ImageHolder> imageHolderList=new ArrayList<ImageHolder>();
+            ImageHolder thum=null;
+            if(commonsMultipartResolver.isMultipart(request)){
+                MultipartHttpServletRequest multipartHttpServletRequest
+                        = (MultipartHttpServletRequest) request;
+                productImg= (CommonsMultipartFile) multipartHttpServletRequest.getFile("productImg");
+                if(productImg!=null){
+                    thum=new ImageHolder(productImg.getInputStream(),productImg.getOriginalFilename());
+                }
+                for(int i=0;i<MAX_FILE_COUNT;i++){
+                    CommonsMultipartFile temp=
+                            (CommonsMultipartFile) multipartHttpServletRequest
+                                    .getFile("productImg"+(i));
+                    if(temp==null){
+                        break;
+                    }
+                    imageHolderList.add(new ImageHolder(temp.getInputStream(),temp.getOriginalFilename()));
+                }
+
+
+             }
+//
+
+
+                Shop shop=(Shop) request.getSession().getAttribute("currentShop");
+
+//                shop=new Shop();
+//                shop.setShopId(68L);
+
+
+                product.setShop(shop);
+//                product.setEnableStatus(0);
+
+                ProductExecution pe=productService.modifyProduct(product,
+                        thum
+                        ,imageHolderList);
+
+                if(pe.getState()== ProductStateEnum.SUCCESS.getState()){
+                    model.put("success",true);
+                    return model;
+                }else{
+                    model.put("success",false);
+                    model.put("errMsg",pe.getStateInfo());
+                    return model;
+                }
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            model.put("success",false);
+            model.put("errMsg",e.toString());
+            return model;
+        }
+    }
+
+
+    @RequestMapping(value = "/product",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Object> getProductById(@Param("productId")Long productId, HttpServletRequest request){
+        Map<String,Object> model=new HashMap<String, Object>();
+        Product product=productService.getProductById(productId);
+        List<ProductCategory> productCategoryList=productCategoryService.getProductCategoryByshopId(product.getShop().getShopId());
+        if(product!=null){
+            model.put("product",product);
+            model.put("productCategoryList",productCategoryList);
+            model.put("success",true);
+        }else{
+            model.put("success", false);
+            model.put("errMsg", "productId为空");
+        }
+        return model;
+    }
+
+    @RequestMapping(value="/getproductlist",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String,Object> getProductList(@Param("rowIndex")int rowIndex,@Param("pageSize")int pageSize,HttpServletRequest request){
+        Map<String,Object> model=new HashMap<String, Object>();
+        Shop shop= (Shop) request.getSession().getAttribute("currentShop");
+
+        shop=new Shop();
+        shop.setShopId(68L);
+
+        if(shop!=null &&shop.getShopId()!=null &&rowIndex>-1&&pageSize>-1){
+
+            String tempId=request.getParameter("productCategoryId");
+            Long productCategoryId;
+            if(tempId!=null)
+               productCategoryId=Long.valueOf(tempId);
+            else{
+                productCategoryId=null;
+            }
+            String productName=request.getParameter("productName");
+
+            Product product=compactProductCondition(shop,productCategoryId,productName);
+            ProductExecution pe;
+            if(pageSize!=0)
+                pe=productService.getProductList(product,rowIndex,pageSize);
+            else
+                pe=productService.getProductList(product,rowIndex,10);
+
+            List<Product> list=pe.getList();
+
+            if(pe.getState()==ProductStateEnum.SUCCESS.getState()){
+                model.put("success",true);
+                model.put("productList",list);
+                model.put("count",pe.getCount());
+            }else{
+                model.put("success",false);
+                model.put("errMsg",pe.getStateInfo());
+            }
+        }else{
+            model.put("success",false);
+            model.put("errMsg","参数错误");
         }
 
         return model;
     }
 
+    private Product compactProductCondition(Shop shop,Long productCategoryId,String productName){
+        Product product=new Product();
 
-    @RequestMapping(value = "/batchaddproductcategory",method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String,Object> batchAddProductCategory(HttpServletRequest request, @RequestBody List<ProductCategory> list ){
-        Map<String,Object> model=new HashMap<String, Object>();
-        HttpSession session=request.getSession();
-        Shop shop= (Shop) session.getAttribute("currentShop");
-        if(shop==null){
-            model.put("success",false);
-            model.put("errMsg","无商店信息");
-            return model;
-        }
-        for(ProductCategory p : list){
-            p.setShopId(shop.getShopId());
-            p.setCreateTime(new Date());
-        }
+        product.setShop(shop);
 
-        if(list!=null && list.size()>0) {
-            ProductCategoryExecution pe = productCategoryService.batchAddProductCategory(list);
-            if (pe.getState() == ProductCategoryStateEnum.SUCCESS.getState()) {
-                model.put("success", true);
-                return model;
-            } else {
-                model.put("success", false);
-                model.put("errMsg", pe.getStateInfo());
-                return model;
-            }
+        if(productCategoryId!=null){
+            ProductCategory productCategory=new ProductCategory();
+            productCategory.setProductCategoryId(productCategoryId);
+            product.setProductCategory(productCategory);
         }
-        else{
-            model.put("success", false);
-            model.put("errMsg", "无输入商品类别");
-            return model;
+        if(productName!=null){
+            product.setProductName(productName);
         }
+        return product;
+
     }
-
-    @RequestMapping(value="/removeproductcategory",method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String,Object> removeProductCategory(Long productCategoryId,HttpSession session){
-
-       //TODO 删除商品类别时应将该类别下的商品的category置为null
-
-        Map<String,Object> model=new HashMap<String, Object>();
-        Shop shop=(Shop)session.getAttribute("currentShop");
-        try {
-            if (productCategoryId != null) {
-                ProductCategoryExecution pe = productCategoryService.deleteProductCategory(productCategoryId, shop.getShopId());
-
-                if (pe.getState() == ProductCategoryStateEnum.SUCCESS.getState()) {
-                    model.put("success", true);
-                    return model;
-                } else {
-                    model.put("success", false);
-                    model.put("errMsg", pe.getStateInfo());
-                    return model;
-                }
-
-            } else {
-                model.put("success", false);
-                model.put("errMsg", "无此类别");
-                return model;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            model.put("success", false);
-            model.put("errMsg", e.toString());
-            return model;
-        }
-    }
-
 
 }

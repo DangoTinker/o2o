@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ShopCategoryService {
 
-    public List<ShopCategory> queryShopCategory(ShopCategory shopCategory);
+    public List<ShopCategory> queryShopCategoryList(ShopCategory shopCategory);
 
 }
