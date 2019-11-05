@@ -12,8 +12,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="HTML File" />
         <option value="Interface" />
+        <option value="HTML File" />
         <option value="Class" />
       </list>
     </option>
@@ -25,7 +25,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -54,22 +54,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Maven.tomcat7">
-    <configuration name="ProductDaoTest.queryProductByIdTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Myo2o" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="o2o.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="o2o.dao" />
-      <option name="MAIN_CLASS_NAME" value="o2o.dao.ProductDaoTest" />
-      <option name="METHOD_NAME" value="queryProductByIdTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ProductDaoTest.queryProductListTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Myo2o" />
       <extension name="coverage">
@@ -134,6 +118,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ShopServiceTest.getShopListTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Myo2o" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="o2o.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="o2o.service" />
+      <option name="MAIN_CLASS_NAME" value="o2o.service.ShopServiceTest" />
+      <option name="METHOD_NAME" value="getShopListTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="tomcat7" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -161,11 +161,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ShopServiceTest.getShopListTest" />
         <item itemvalue="JUnit.ShopCategoryDaoTest.queryShopCategoryTest" />
         <item itemvalue="JUnit.ProductDaoTest.queryProductListTest" />
         <item itemvalue="JUnit.ProductImgDaoTest.deleteProductImgByProductIdTest" />
         <item itemvalue="JUnit.ProductDaoTest.updateProductTest" />
-        <item itemvalue="JUnit.ProductDaoTest.queryProductByIdTest" />
       </list>
     </recent_temporary>
   </component>

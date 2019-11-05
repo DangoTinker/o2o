@@ -67,7 +67,7 @@ public class ShopServiceTest extends BaseTest {
     public void getShopListTest(){
         Shop shop=new Shop();
 //        shop.setShopName("e");
-        ShopExecution se=shopService.getShopList(shop,2,2);
+        ShopExecution se=shopService.getShopList(shop,1,2);
         System.out.println(se.getCount());
         List<Shop> list=se.getShops();
         for(int i=0;i<list.size();i++){

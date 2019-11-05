@@ -19,7 +19,7 @@
             </if>
 
             <if test="shopCategoryCondition!=null and shopCategoryCondition.parent!=null">
-                and parent=#{shopCategoryCondition.parent.shopCategoryId}
+                and parent_id=#{shopCategoryCondition.parent.shopCategoryId}
             </if>
 
         </where>

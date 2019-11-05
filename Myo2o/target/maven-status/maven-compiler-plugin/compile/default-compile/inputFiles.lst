@@ -1,4 +1,6 @@
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\web\superadmin\AreaController.java
+C:\Users\63296\IdeaProjects\Myo2o\src\main\java\web\frontend\MainPageController.java
+C:\Users\63296\IdeaProjects\Myo2o\src\main\java\service\impl\HeadLineServiceImpl.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\dao\ProductDao.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\entity\ShopCategory.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\dto\ProductCategoryExecution.java
@@ -11,6 +13,7 @@ C:\Users\63296\IdeaProjects\Myo2o\src\main\java\web\shopadmin\ProductCategoryMan
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\entity\WeChatAuth.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\enums\ProductCategoryStateEnum.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\entity\Area.java
+C:\Users\63296\IdeaProjects\Myo2o\src\main\java\web\frontend\ShopListController.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\util\DESUtil.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\service\impl\AreaServiceImpl.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\util\EncryptPropertyPlaceholderConfigurer.java
@@ -20,6 +23,7 @@ C:\Users\63296\IdeaProjects\Myo2o\src\main\java\dao\split\DynamicDataSourceHolde
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\dao\split\DynamicDataSourceInterceptor.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\web\shopadmin\ProductManagementController.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\dao\ProductImgDao.java
+C:\Users\63296\IdeaProjects\Myo2o\src\main\java\web\frontend\FrontendAdminController.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\service\impl\ShopCategoryServiceImpl.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\entity\Shop.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\service\AreaService.java
@@ -33,9 +37,12 @@ C:\Users\63296\IdeaProjects\Myo2o\src\main\java\util\PageCalculator.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\enums\ProductStateEnum.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\service\ProductService.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\web\shopadmin\ProductAdminController.java
+C:\Users\63296\IdeaProjects\Myo2o\src\main\java\dao\HeadLineDao.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\web\temp.java
+C:\Users\63296\IdeaProjects\Myo2o\src\main\java\util\HttpServletRequestUtil.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\entity\ProductCategory.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\web\shopadmin\ShopManagementController.java
+C:\Users\63296\IdeaProjects\Myo2o\src\main\java\service\HeadLineService.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\dao\split\DynamicDataSource.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\entity\Product.java
 C:\Users\63296\IdeaProjects\Myo2o\src\main\java\dao\ShopCategoryDao.java

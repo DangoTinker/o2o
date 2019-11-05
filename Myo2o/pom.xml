@@ -217,11 +217,14 @@
         <plugin>
           <groupId>org.apache.tomcat.maven</groupId>
           <artifactId>tomcat7-maven-plugin</artifactId>
-          <version>2.1</version>
+          <version>2.2</version>
           <configuration>
             <port>8080</port>
             <path>/</path>
             <uriEncoding>UTF-8</uriEncoding>
+            <staticContextPath>/upload</staticContextPath>
+            <staticContextDocbase>D:/o2o/image/upload</staticContextDocbase>
+
             <server>tomcat7</server>
           </configuration>
         </plugin>

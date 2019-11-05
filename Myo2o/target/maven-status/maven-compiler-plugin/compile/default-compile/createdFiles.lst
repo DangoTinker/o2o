@@ -5,7 +5,9 @@ web\shopadmin\ProductCategoryManagementController.class
 dto\ProductCategoryExecution.class
 web\frontend\MainPageController.class
 web\shopadmin\ProductAdminController.class
+util\HttpServletRequestUtil.class
 service\impl\ProductCategoryServiceImpl.class
+web\frontend\FrontendAdminController.class
 enums\ProductCategoryStateEnum.class
 web\superadmin\AreaController.class
 service\impl\HeadLineServiceImpl.class

@@ -18,3 +18,4 @@ public interface ShopDao {
 
     public int queryShopCount(@Param("shopCondition") Shop shop);
 }
+

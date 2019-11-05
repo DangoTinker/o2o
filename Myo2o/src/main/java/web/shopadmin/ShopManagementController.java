@@ -20,6 +20,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import service.AreaService;
 import service.ShopCategoryService;
 import service.ShopService;
+import util.HttpServletRequestUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -138,8 +139,9 @@ public class ShopManagementController {
 
     @RequestMapping(value="/shop",method = RequestMethod.GET)
     @ResponseBody
-    public Map<String,Object> getShop(@RequestParam("shopId") Long shopId){
+    public Map<String,Object> getShop(HttpServletRequest request){
         Map<String,Object> model=new HashMap<String, Object>();
+        long shopId= HttpServletRequestUtil.getLong(request,"shopId");
         if(shopId>-1){
             try{
                 Shop shop=shopService.getShopById(shopId);

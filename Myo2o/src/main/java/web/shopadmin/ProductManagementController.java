@@ -19,6 +19,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import service.ProductCategoryService;
 import service.ProductService;
+import util.PageCalculator;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -213,14 +214,15 @@ public class ProductManagementController {
 
     @RequestMapping(value="/getproductlist",method = RequestMethod.GET)
     @ResponseBody
-    public Map<String,Object> getProductList(@Param("rowIndex")int rowIndex,@Param("pageSize")int pageSize,HttpServletRequest request){
+    public Map<String,Object> getProductList(@Param("pageIndex")int pageIndex,@Param("pageSize")int pageSize,HttpServletRequest request){
         Map<String,Object> model=new HashMap<String, Object>();
         Shop shop= (Shop) request.getSession().getAttribute("currentShop");
+        int rowIndex= PageCalculator.calculateRowIndex(pageIndex,pageSize);
 
-        shop=new Shop();
-        shop.setShopId(68L);
+//        shop=new Shop();
+//        shop.setShopId(68L);
 
-        if(shop!=null &&shop.getShopId()!=null &&rowIndex>-1&&pageSize>-1){
+        if(shop!=null &&shop.getShopId()!=null ){
 
             String tempId=request.getParameter("productCategoryId");
             Long productCategoryId;
@@ -233,10 +235,8 @@ public class ProductManagementController {
 
             Product product=compactProductCondition(shop,productCategoryId,productName);
             ProductExecution pe;
-            if(pageSize!=0)
                 pe=productService.getProductList(product,rowIndex,pageSize);
-            else
-                pe=productService.getProductList(product,rowIndex,10);
+
 
             List<Product> list=pe.getList();
 

@@ -4,7 +4,7 @@ $(function(){
 
     var shopId=getQueryString("shopId");
     var initUrl='/shopadmin/shopinitinfo';
-    var shopRegisterUrl='/shopadmin/registerShop';
+    var shopRegisterUrl='/shopadmin/shopoperation';
     var shopInfoUrl="/shopadmin/shop?shopId="+shopId;
     var modifyShopUrl="/shopadmin/modifyshop";
 

@@ -12,11 +12,11 @@ public class ShopCategory {
     private Date lastEditTime;
 
     private Integer priority;
-    private Long parent;
+    private ShopCategory parent;
 
     public ShopCategory(){}
 
-    public ShopCategory(String shopCategoryName, String shopCategoryDesc, String shopCategoryImg, Date createTime, Date lastEditTime, Integer priority, Long parent) {
+    public ShopCategory(String shopCategoryName, String shopCategoryDesc, String shopCategoryImg, Date createTime, Date lastEditTime, Integer priority, ShopCategory parent) {
         this.shopCategoryName = shopCategoryName;
         this.shopCategoryDesc = shopCategoryDesc;
         this.shopCategoryImg = shopCategoryImg;
@@ -54,7 +54,7 @@ public class ShopCategory {
         this.priority = priority;
     }
 
-    public void setParent(Long parent) {
+    public void setParent(ShopCategory parent) {
         this.parent = parent;
     }
 
@@ -86,7 +86,7 @@ public class ShopCategory {
         return priority;
     }
 
-    public Long getParent() {
+    public ShopCategory getParent() {
         return parent;
     }
 }
