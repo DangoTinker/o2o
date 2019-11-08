@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 配置整合mybatis过程 -->
+    <!-- 1.配置数据库相关参数properties的属性：${url} -->
+
+    <!--    <context:property-placeholder location="classpath:jdbc.properties"/>-->
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis.pool.maxActive}"/>
+        <property name="maxIdle" value="${redis.pool.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.pool.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.pool.testOnBorrow}"/>
+    </bean>
+
+    <bean id="jedisWritePool" class="cache.JedisPoolWriper">
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <constructor-arg index="1" value="${redis.hostname}"/>
+        <constructor-arg index="2" value="${redis.port}" type="int"/>
+    </bean>
+
+<!--    TODO 未加空参构造函数，想试验下对不对-->
+    <bean id="jedisUtil" class="cache.JedisUtil" scope="singleton">
+        <constructor-arg index="0" ref="jedisWritePool"/>
+    </bean>
+
+    <bean id="jedisKeys" class="cache.JedisUtil$Keys" scope="singleton">
+        <constructor-arg  ref="jedisUtil"/>
+
+    </bean>
+
+    <bean id="jedisStrings" class="cache.JedisUtil$Strings" scope="singleton">
+        <constructor-arg  ref="jedisUtil"/>
+
+    </bean>
+
+
+
+</beans>

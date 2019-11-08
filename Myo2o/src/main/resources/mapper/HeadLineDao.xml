@@ -8,7 +8,7 @@
     <select id="queryHeadLine" resultType="entity.HeadLine">
         select * from tb_head_line
         <where>
-            <if test="headLineCondition.enableStatus!=null">
+            <if test="headLineCondition!=null and headLineCondition.enableStatus!=null">
                 and enable_status=#{headLineCondition.enableStatus}
             </if>
 

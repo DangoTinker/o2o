@@ -1,7 +1,9 @@
 web\shopadmin\ShopAdminController.class
 web\shopadmin\ProductManagementController.class
+web\frontend\ProductDetailController.class
 service\ProductCategoryService.class
 web\shopadmin\ProductCategoryManagementController.class
+web\frontend\ShopDetailController.class
 dto\ProductCategoryExecution.class
 web\frontend\MainPageController.class
 web\shopadmin\ProductAdminController.class

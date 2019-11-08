@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import service.ProductService;
 import util.ImageUtil;
+import util.PageCalculator;
 import util.PathUtil;
 
 import java.util.ArrayList;
@@ -138,8 +139,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductExecution getProductList(Product productCondition, int rowIndex, int pageSize) {
-        List<Product> list=productDao.queryProductList(productCondition,rowIndex,pageSize);
+    public ProductExecution getProductList(Product productCondition, int pageIndex, int pageSize) {
+        List<Product> list=productDao.queryProductList(productCondition, PageCalculator.calculateRowIndex(pageIndex,pageSize),pageSize);
         int count=productDao.queryProductCount(productCondition);
         if(list!=null && list.size()>0){
             ProductExecution pe=new ProductExecution(ProductStateEnum.SUCCESS,list);
